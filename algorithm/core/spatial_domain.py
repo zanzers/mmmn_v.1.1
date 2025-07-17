@@ -11,8 +11,7 @@ class Spatial_Domain:
         self.nor_img = g_norm(img_input)
 
     def ela(self, compression: int, multp: int) -> np.ndarray:
-        g_imageQuality(self.nor_img, 'ela_result.jpg', compression)
-        compressed = cv2.imread('ela_result.jpg')
+        compressed = g_imageQuality(self.nor_img, compression)
         diff = cv2.absdiff(self.nor_img, compressed)
         ela_img = np.clip(diff * multp, 0, 255).astype(np.uint8)
         extractEla(ela_img)

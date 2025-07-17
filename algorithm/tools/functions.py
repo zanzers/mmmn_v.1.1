@@ -1,3 +1,4 @@
+from algorithm.others.extend_functions import *
 from sklearn.decomposition import PCA
 from sklearn.metrics.pairwise import euclidean_distances
 from typing import Union
@@ -9,18 +10,6 @@ import json
 import numpy as np
 
 
-def g_checkInput(extension: str) -> str:
-    image_exts = (".jpg", ".jpeg", ".png", ".bmp", ".tiff")
-    video_exts = (".mp4", ".avi", ".mov", ".mkv")
-    
-    ext = os.path.splitext(extension)[1].lower()
-
-    if ext in image_exts:
-        return "image"
-    elif ext in video_exts:
-        return "video"
-    else:
-        return "unsupported"
 
 def g_norm(img:np.ndarray) -> np.ndarray:
     ycrcb = cv2.cvtColor(img, cv2.COLOR_BGR2YCrCb)
@@ -38,11 +27,14 @@ def g_grayScale(img: np.ndarray, dtype: type = None ) -> np.ndarray:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     return gray.astype(dtype) if dtype is not None else gray
 
-def g_imageQuality(img: np.ndarray, path: np.ndarray, compress: int) -> np.ndarray:
-    cv2.imwrite(path, img, [int(cv2.IMWRITE_JPEG_QUALITY), compress])
-    compress_img = cv2.imread(path)
-    g_saveImage(path, compress_img, True)
-    raise compress_img
+def g_imageQuality(img: np.ndarray, compress: int) -> np.ndarray:
+    cv2.imwrite('ela_result.jpg', img, [int(cv2.IMWRITE_JPEG_QUALITY), compress])
+    compress_img = cv2.imread('ela_result.jpg')
+    g_saveImage([
+        ('ela_result.jpg', compress_img)
+    ], remove_after=True)
+    return compress_img
+    
 
 def g_imageThreshold(img: np.ndarray, thresh_val: int, max_val: int, thresh_type: type= None) -> np.ndarray:
     if thresh_type is None:
@@ -86,6 +78,24 @@ def g_lapticanMagitude(img: np.ndarray) -> np.ndarray:
 
 # SAVE FUNCTIONS
 
+
+def g_checkInput(extension: np.ndarray) -> bool:
+
+
+
+    image_exts = (".jpg", ".jpeg", ".png", ".bmp", ".tiff")
+    video_exts = (".mp4", ".avi", ".mov", ".mkv")
+    
+    ext = os.path.splitext(extension)[1].lower()
+
+    if ext in image_exts:
+        return True
+    elif ext in video_exts:
+        return False
+    else:
+        return "unsupported"
+
+
 def g_saveImage(temp_imgs: Union[tuple[str, any], list[tuple[str, any]]], remove_after: bool = False) -> None:
     if isinstance(temp_imgs, tuple):
         temp_imgs = [temp_imgs]
@@ -124,3 +134,6 @@ def g_saveFeatures(label: str, feature_data: dict, reset: bool = False):
 
 
 
+def g_loadConfig() -> dict:
+    config = extend_loadConfig()
+    return config

@@ -36,7 +36,7 @@ def process_img(img: np.ndarray, CONFIG) -> dict:
                 ela_cfg.get("compression", 85),
                 ela_cfg.get("multiplier", 40)
             )
-
+    
 
 def process_video(img: np.ndarray) -> dict:
     print("video")

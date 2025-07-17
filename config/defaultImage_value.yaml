@@ -4,7 +4,13 @@ image:
     compression: 85
     multiplier: 40
 
+  noise:
+    enabled: true
+    local_mean: 7
+    variance: 40
 
-
-
-
+  copyMove:
+    enabled: true
+    block_size: 16
+    step: 8
+    threshold: 1000

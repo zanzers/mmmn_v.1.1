@@ -92,7 +92,7 @@ def g_saveImage(temp_imgs: Union[tuple[str, any], list[tuple[str, any]]], remove
 
     save_dir = os.path.join(
         "data",
-        "img_maps")
+        "output")
     os.makedirs(save_dir, exist_ok=True)
 
     for filename, img_data in temp_imgs:

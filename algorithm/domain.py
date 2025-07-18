@@ -33,9 +33,25 @@ def process_img(img: np.ndarray, CONFIG) -> dict:
     if ela_cfg := image_config.get("ela"):
         if ela_cfg.get("enabled"):
             image_analysis.ela(
-                ela_cfg.get("compression", 85),
-                ela_cfg.get("multiplier", 40)
+                ela_cfg.get("compression"),
+                ela_cfg.get("multiplier")
             )
+    
+    if noise_cfg := image_config.get("noise"):
+        if noise_cfg.get("enabled"):
+            image_analysis.noise(
+                noise_cfg.get("local_mean"),
+                noise_cfg.get("variance")
+            )
+
+    if copyMove_cfg := image_config.get("copyMove"):
+        if copyMove_cfg.get("enabled"):
+            image_analysis.copyMove(
+                copyMove_cfg.get("block_size"),
+                copyMove_cfg.get("step"),
+                copyMove_cfg.get("threshold")
+            )
+    image_analysis.resampling()
     
 
 def process_video(img: np.ndarray) -> dict:

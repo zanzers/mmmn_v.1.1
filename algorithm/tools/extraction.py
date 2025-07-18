@@ -1,3 +1,4 @@
+
 from algorithm.tools.functions import *
 import cv2
 import numpy as np
@@ -33,7 +34,6 @@ def extractNoise(norm: np.ndarray, prnu: np.ndarray, wavelet: np.ndarray) -> Non
     ratio_norm = g_imageRatio(float, np.sum, norm_thres, 255, norm.shape[0], norm.shape[1])
     ratio_prnu = g_imageRatio(float, np.sum, prnu_thres, 255, prnu.shape[0], prnu.shape[1])    
 
-
     g_saveImage([
         ("norm_output.jpg", norm),
         ("prnu_output.jpg", prnu),
@@ -54,7 +54,7 @@ def extractNoise(norm: np.ndarray, prnu: np.ndarray, wavelet: np.ndarray) -> Non
         "total_prnu_error": total_prnu,
         "local_prnu_ratio": ratio_prnu,
 
-        "wavelet_noise": wavelet
+        "wavelet": float(wavelet)
 
     }
 

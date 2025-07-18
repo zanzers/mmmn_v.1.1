@@ -117,20 +117,30 @@ def g_saveImage(temp_imgs: Union[tuple[str, any], list[tuple[str, any]]], remove
         if remove_after:
             os.remove(filename)
 
-def g_saveFeatures(label: str, feature_data: dict, reset: bool = False):
-        save_dir = os.path.join(
-            "data",
-            "traning_data"
-        )
-        os.makedirs(save_dir, exist_ok=True)
-        json_path = os.path.join(save_dir, "features_data.json")    
 
-        existing_data = {} if reset or not os.path.exists(json_path) else json.load(open(json_path, "r"))
-        existing_data[label] = feature_data
-        with open(json_path, "w") as f:
-            json.dump(existing_data, f, indent=4)
-        
-        print(f"'{label}' features saved to {json_path}")
+def g_saveFeatures(label: str, feature_data: dict, reset: bool = False):
+    save_dir = os.path.join("data", "traning_data")
+    os.makedirs(save_dir, exist_ok=True)
+    json_path = os.path.join(save_dir, "features_data.json")
+
+    # Handle existing file safely
+    if reset or not os.path.exists(json_path):
+        existing_data = {}
+    else:
+        try:
+            with open(json_path, "r") as f:
+                existing_data = json.load(f)
+        except json.JSONDecodeError:
+            print(f"[WARNING] Corrupted JSON detected at {json_path}. Starting fresh.")
+            existing_data = {}
+
+    existing_data[label] = feature_data
+
+    # Save updated data
+    with open(json_path, "w") as f:
+        json.dump(existing_data, f, indent=4)
+
+    print(f"'{label}' features saved to {json_path}")
 
 
 

@@ -13,7 +13,7 @@ def run(img):
 
 if __name__ == "__main__":
 
-    filename = "data/traning_img/au_1.jpg"
+    filename = "data/traning_img/t0.jpg"
     run(filename)
 
 

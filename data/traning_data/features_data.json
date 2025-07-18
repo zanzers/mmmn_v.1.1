@@ -1,9 +1,32 @@
 {
     "Ela": {
-        "mean_error": 14.761268819917571,
-        "std_error": 28.556633643624757,
-        "max_error": 248.0,
-        "total_error": 21059607.0,
-        "tampered_ratio": 0.0012329324025009112
+        "mean_error": 56.383443196614586,
+        "std_error": 45.26164334576508,
+        "max_error": 240.0,
+        "total_error": 5542718.0,
+        "tampered_ratio": 0.007161458333333333
+    },
+    "Noise": {
+        "mean_norm_error": 11.176198323567709,
+        "std_norm_error": 24.807003883975995,
+        "max_norm_error": 254.0,
+        "total_norm_error": 1098665.0,
+        "local_norm_ratio": 0.0008748372395833334,
+        "mean_prnu_error": 102.12185668945312,
+        "std_prnu_error": 121.41060055946352,
+        "max_prnu_error": 255.0,
+        "total_prnu_error": 10038987.0,
+        "local_prnu_ratio": 0.3989359537760417,
+        "wavelet": 10.432137489318848
+    },
+    "Copy-Move": {
+        "tamper_ratio": 1,
+        "tampered_area": 93873,
+        "bounding_box": 93873,
+        "tampered": 0.954925537109375
+    },
+    "Resample": {
+        "periodicity_std": 17.2552,
+        "resampled": 17.255224810363174
     }
 }

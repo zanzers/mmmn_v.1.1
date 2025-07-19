@@ -10,7 +10,6 @@ import json
 import numpy as np
 
 
-
 def g_norm(img:np.ndarray) -> np.ndarray:
     ycrcb = cv2.cvtColor(img, cv2.COLOR_BGR2YCrCb)
     y, cr, cb = cv2.split(ycrcb)
@@ -79,10 +78,12 @@ def g_lapticanMagitude(img: np.ndarray) -> np.ndarray:
 # SAVE FUNCTIONS
 
 
+
+def g_loadConfig() -> dict:
+    config = extend_loadConfig()
+    return config
+
 def g_checkInput(extension: np.ndarray) -> bool:
-
-
-
     image_exts = (".jpg", ".jpeg", ".png", ".bmp", ".tiff")
     video_exts = (".mp4", ".avi", ".mov", ".mkv")
     
@@ -123,7 +124,6 @@ def g_saveFeatures(label: str, feature_data: dict, reset: bool = False):
     os.makedirs(save_dir, exist_ok=True)
     json_path = os.path.join(save_dir, "features_data.json")
 
-    # Handle existing file safely
     if reset or not os.path.exists(json_path):
         existing_data = {}
     else:
@@ -135,8 +135,6 @@ def g_saveFeatures(label: str, feature_data: dict, reset: bool = False):
             existing_data = {}
 
     existing_data[label] = feature_data
-
-    # Save updated data
     with open(json_path, "w") as f:
         json.dump(existing_data, f, indent=4)
 
@@ -144,6 +142,3 @@ def g_saveFeatures(label: str, feature_data: dict, reset: bool = False):
 
 
 
-def g_loadConfig() -> dict:
-    config = extend_loadConfig()
-    return config

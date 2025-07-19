@@ -98,7 +98,7 @@ def extractResampling(spectrum: np.ndarray) -> None:
     periodicity = float(np.std(central_band))
     g_saveImage([
         ("resample_output.jpg", spectrum)
-    ])
+    ], remove_after=True)
 
     resample_extaction = {
         "periodicity_std": round(periodicity, 4),
